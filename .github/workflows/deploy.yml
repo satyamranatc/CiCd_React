@@ -1,0 +1,20 @@
+name: Deploy React App
+
+on:
+  push:
+    branches:
+      - master
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Deploy to Hostinger VPS
+        uses: appleboy/ssh-action@v1.2.2
+        with:
+          host: 93.127.166.54
+          username: root
+          key: ${{ secrets.SSH_PRIVATE_KEY }}
+          script: |
+            ./deploy.sh
